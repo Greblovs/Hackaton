@@ -11,6 +11,7 @@ import GraphElement from "../graph/graph"
 import axios from "axios";
 
 const searchLine = "https://buckwheat-price-seeker.herokuapp.com/products/search?"
+const searchWheat = "https://grecha-back.herokuapp.com/buckwheat/search"
 const getCategories = "https://buckwheat-price-seeker.herokuapp.com/categories/main?page=0&pageSize=8"
 
 const Home = () => {
@@ -22,8 +23,27 @@ const Home = () => {
         categories: null,
         page: 0,
         items: [],
-        added:0
+        added:0,
+        but: 0,
+        start: 0
     })
+    
+
+    if (state.start == 0) {
+
+        state.start = 1
+        axios.get(searchWheat).then(result => {
+            setState(prev => {
+                return {
+                    ...prev,
+                    searchRes: result,
+                    page: 0,
+                    but: 1,
+                    added: 0
+                }
+            })
+        })
+    }
 
 
     const openMenu = () => {
@@ -91,15 +111,15 @@ const Home = () => {
                     searchRes: result,
                     page: 0,
                     added: 0,
-                    items: []
+                    items: [],
+                    but: 0
                 }
             })
         })
     }
-    console.log(state.searchRes)
+
 
     const loadMore = (e) => {
-        alert("searcg")
         let num = state.page + 1;
         let searchLineReqQ = searchLine + "page=" + num + "&pageSize=12&search=" + state.input
         axios.get(searchLineReqQ).then(result => {
@@ -108,7 +128,8 @@ const Home = () => {
                     ...prev,
                     searchRes: result,
                     page: num,
-                    added: 0
+                    added: 0,
+                    but:0
                 }
             })
         })
@@ -119,7 +140,7 @@ const Home = () => {
         cat = []
         for (let i in state.categories.data["objects"]) {
             let e = state.categories.data.objects[i];
-            console.log(e)
+
             cat.push(e.title)
         }
     }
@@ -136,26 +157,44 @@ const Home = () => {
 
 
     if (state.searchRes != null && state.added == 0) {
+        if (state.but == 0) {
+            for (let i in state.searchRes.data["objects"]) {
 
-        for (let i in state.searchRes.data["objects"]) {
-            console.log(i)
-            let e = state.searchRes.data.objects[i];
-            let firstPrice = null;
-            for (let key in e.prices) {
-                firstPrice = key;
-                break;
+                let e = state.searchRes.data.objects[i];
+                let firstPrice = null;
+                for (let key in e.prices) {
+                    firstPrice = key;
+                    break;
+                }
+                state.items.push({
+                    img: e.img["s350x350"],
+                    price: e.prices[firstPrice],
+                    reseller: firstPrice,
+                    title: e.title,
+                    url: e.web_url,
+                    weight: e.weight,
+                    unit: e.unit,
+                    producer: e.producer
+                })
+                state.added = 1;
             }
-            state.items.push({
-                img: e.img["s350x350"],
-                price: e.prices[firstPrice],
-                reseller: firstPrice,
-                title: e.title,
-                url: e.web_url,
-                weight: e.weight,
-                unit: e.unit,
-                producer: e.producer
-            })
-        state.added = 1;
+        }else{
+            for (let i in state.searchRes.data) {
+
+                console.log("--------")
+                let e =state.searchRes.data[i]
+                state.items.push({
+                    img: e.img_url,
+                    price: e.price,
+                    reseller: e.shop,
+                    title: e.title,
+                    url: e.web_url,
+                    weight: e.weight,
+                    unit: e.unit,
+                    producer: 1
+                })
+                state.added = 1;
+            }
         }
     }
 
