@@ -130,33 +130,96 @@
   position: absolute;
   margin-left: calc(100% - 90px);
 }
-.searchField{
-  border: none;
-  width: 580px;
-  height: 30px;
-  padding: 5px;
-  padding-left: 10px;
-  border-radius: 20px;
-  margin-top: 20px;
-  background-color: white;
-  z-index: 4;
-  font-size: 20px;
+
+@media screen and (min-width: 700px) {
+  .searchField {
+    border: none;
+    width: 580px;
+    height: 30px;
+    padding: 5px;
+    padding-left: 10px;
+    border-radius: 20px;
+    margin-top: 20px;
+    background-color: white;
+    z-index: 4;
+    font-size: 20px;
+  }
+  .searchButton {
+    margin-left: 545px;
+    position: absolute;
+    width: 50px;
+    height: 40px;
+    background-color: #56494e;
+    margin-top: -40px;
+    border-radius: 0px 25px 25px 0px;
+    cursor: pointer;
+  }
+  .inputWrapper{
+    margin-left: calc(50% - 300px);
+    width: 580px;
+    height: 80px;
+  }
 }
-.searchButton{
-  margin-left: 545px;
-  position: absolute;
-  width: 50px;
-  height: 40px;
-  background-color: #56494e;
-  margin-top: -40px;
-  border-radius: 0px 25px 25px 0px;
-  cursor: pointer;
+@media screen and (max-width: 700px) {
+  .searchField {
+    border: none;
+    width: 380px;
+    height: 30px;
+    padding: 5px;
+    padding-left: 10px;
+    border-radius: 20px;
+    margin-top: 20px;
+    background-color: white;
+    z-index: 4;
+    font-size: 20px;
+  }
+  .searchButton {
+    margin-left: 345px;
+    position: absolute;
+    width: 50px;
+    height: 40px;
+    background-color: #56494e;
+    margin-top: -40px;
+    border-radius: 0px 25px 25px 0px;
+    cursor: pointer;
+  }
+  .inputWrapper{
+    margin-left: calc(50% - 170px);
+    width: 380px;
+    height: 80px;
+  }
 }
-.inputWrapper{
-  margin-left: calc(50% - 300px);
-  width: 580px;
-  height: 80px;
+
+@media screen and (max-width: 480px) {
+  .searchField {
+    border: none;
+    width: 200px;
+    height: 30px;
+    padding: 5px;
+    padding-left: 10px;
+    border-radius: 20px;
+    margin-top: 20px;
+    background-color: white;
+    z-index: 4;
+    font-size: 20px;
+  }
+  .searchButton {
+    margin-left: 170px;
+    position: absolute;
+    width: 50px;
+    height: 40px;
+    background-color: #56494e;
+    margin-top: -40px;
+    border-radius: 0px 25px 25px 0px;
+    cursor: pointer;
+  }
+  .inputWrapper{
+    margin-left: calc(50% - 120px);
+    width: 200px;
+    height: 80px;
+  }
 }
+
 
 .mainFrame{
   width: 100vw;

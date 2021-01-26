@@ -211,6 +211,7 @@ const Home = () =>{
                             <input type={"text"} name={"search"} onChange={updateString} className={classes.searchField}>
 
                             </input>
+
                             <div onClick={search} type={"submit"} className={classes.searchButton}>
                                 <FontAwesomeIcon className={classes.search} icon={faSearch} size="lg" />
                             </div>
