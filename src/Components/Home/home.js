@@ -62,8 +62,9 @@ const Home = () =>{
 
     }
 
-    const search = () =>{
-        alert("searching")
+    const search = (e) =>{
+        alert(state.input)
+        e.preventDefault()
         let searchLineReq = searchLine + "page=1&pageSize=12&search=" + state.input
         axios.get(searchLineReq).then(result => {
             setState( prev => {
@@ -90,6 +91,7 @@ const Home = () =>{
             items.push({
                 img: e.img["s350x350"],
                 price: e.prices[firstPrice],
+                reseller: firstPrice,
                 title: e.title,
                 url: e.web_url,
                 weight: e.weight,
@@ -100,6 +102,7 @@ const Home = () =>{
         }
         console.log(items)
     }
+
     let carts = null
     if (items != null) {
         carts = [];
@@ -109,8 +112,12 @@ const Home = () =>{
                    <img className={classes.img} src={element.img}/>
                    <div className={classes.info}>
                        <p className={classes.title}>{element.title}</p>
-                       <p className={classes.price}>Ціна: {element.price/100} грн</p>
-                       <p className={classes.weight}>Вага: {element.weight}</p>
+                       <div className={classes.textBlock}>
+                           <p className={classes.reseller}>{element.reseller}</p>
+                           <p className={classes.price}>Ціна: {element.price/100} грн</p>
+                           <p className={classes.weight}>Вага: {element.weight}</p>
+                       </div>
+                       <a href={element.url} className={classes.follow}>Купить</a>
                    </div>
 
                </div>
