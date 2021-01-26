@@ -229,7 +229,7 @@ const Home = () =>{
                 <div className={classes.mainFrame}>
 
                     {state.carts}
-                    <div className={classes.loadMore}>
+                    <div onClick={loadMore} className={classes.loadMore}>
                         <FontAwesomeIcon className={classes.chartLine}  icon={faSync} size="3x" />
                     </div>
                 </div>
