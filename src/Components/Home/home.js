@@ -5,6 +5,7 @@ import { faBars } from '@fortawesome/free-solid-svg-icons'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import { faChartLine } from '@fortawesome/free-solid-svg-icons'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import {faSync} from "@fortawesome/free-solid-svg-icons"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import GraphElement from  "../graph/graph"
 import axios from "axios";
@@ -18,7 +19,9 @@ const Home = () =>{
         graphStatus: 0,                 //0 - closed, 1 - opened
         input: null,
         searchRes: null,
-        categories: null
+        categories: null,
+        page: 0,
+        carts: []
     })
 
 
@@ -79,17 +82,32 @@ const Home = () =>{
 
     const search = (e) =>{
         e.preventDefault()
-        let searchLineReq = searchLine + "page=1&pageSize=12&search=" + state.input
+        let searchLineReq = searchLine + "page=0&pageSize=12&search=" + state.input
         axios.get(searchLineReq).then(result => {
             setState( prev => {
                 return{
                     ...prev,
-                    searchRes: result
+                    searchRes: result,
+                    page: 0
                 }
             })
         })
     }
     console.log(state.searchRes)
+
+    const loadMore = (e) =>{
+        let  num = state.page +1;
+        let searchLineReqQ =  searchLine + "page="+num+"&pageSize=12&search=" + state.input
+        axios.get(searchLineReqQ).then(result => {
+            setState( prev => {
+                return{
+                    ...prev,
+                    searchRes: result,
+                    page: num
+                }
+            })
+        })
+    }
 
     let cat = null
     if (state.categories != null){
@@ -114,7 +132,9 @@ const Home = () =>{
 
     let items = null
     if (state.searchRes != null) {
+
         items = []
+
 
         for (let i in state.searchRes.data["objects"]) {
             let e = state.searchRes.data.objects[i];
@@ -138,10 +158,10 @@ const Home = () =>{
         console.log(items)
     }
 
-    let carts = null
+
     if (items != null) {
-        carts = [];
-        carts = items.map((element, index)=>{
+
+        state.carts = items.map((element, index)=>{
            return(
                <div className={classes.lot}>
                    <img className={classes.img} src={element.img}/>
@@ -208,8 +228,10 @@ const Home = () =>{
 
                 <div className={classes.mainFrame}>
 
-                    {carts}
-
+                    {state.carts}
+                    <div className={classes.loadMore}>
+                        <FontAwesomeIcon className={classes.chartLine}  icon={faSync} size="3x" />
+                    </div>
                 </div>
 
             </div>
