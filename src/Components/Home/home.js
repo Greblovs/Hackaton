@@ -10,13 +10,15 @@ import GraphElement from  "../graph/graph"
 import axios from "axios";
 
 const searchLine = "https://buckwheat-price-seeker.herokuapp.com/products/search?"
+const getCategories = "https://buckwheat-price-seeker.herokuapp.com/categories/main?page=0&pageSize=8"
 
 const Home = () =>{
     const [state, setState] = useState({
         menuStatus: 0,                  //0 - closed, 1 - opened
         graphStatus: 0,                 //0 - closed, 1 - opened
         input: null,
-        searchRes: null
+        searchRes: null,
+        categories: null
     })
 
 
@@ -62,6 +64,19 @@ const Home = () =>{
 
     }
 
+    if (state.categories == null) {
+        axios.get(getCategories).then(result => {
+            setState(prev => {
+                return {
+                    ...prev,
+                    categories: result
+                }
+            })
+        })
+    }
+
+
+
     const search = (e) =>{
         alert(state.input)
         e.preventDefault()
@@ -76,6 +91,27 @@ const Home = () =>{
         })
     }
     console.log(state.searchRes)
+
+    let cat = null
+    if (state.categories != null){
+        cat = []
+        for (let i in state.categories.data["objects"]){
+            let e = state.categories.data.objects[i];
+            console.log(e)
+            cat.push(e.title)
+        }
+    }
+
+    let catList = null;
+    if (cat != null) {
+        catList = [];
+        catList = cat.map((element, index)=>{
+            return(
+                <p className={classes.menuButton}>{element}</p>
+            )
+        })
+    }
+
 
     let items = null
     if (state.searchRes != null) {
@@ -123,12 +159,7 @@ const Home = () =>{
                </div>
            )
         })
-        for (let i in items) {
-            carts.push(
 
-
-            )
-        }
     }
 
 
@@ -145,6 +176,15 @@ const Home = () =>{
                     <div className={classes.closeMenu} onClick={openMenu}>
                         <FontAwesomeIcon className={classes.cross} icon={faTimes} size="3x" />
                     </div>
+                    <div className={classes.menuName}>Меню</div>
+                    <div className={classes.categories}>
+
+                        <div className={classes.searchGrecha} >Посмотреть Гречу</div>
+                        {catList}
+
+
+                    </div>
+
                 </div>
                 <div className={classes.menu}>
                     <div className={classes.openMenu} onClick={openMenu}>
