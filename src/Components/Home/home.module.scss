@@ -29,7 +29,7 @@
   text-align: center;
   width: 80px;
   height: 80px;
-  background-color: black;
+  background-color: #56494e;
   position: fixed;
   margin-top: calc(100vh - 200px);
   margin-left: calc(100vw - 140px);
@@ -42,14 +42,15 @@
 }
 
 .cross{
-  color: black;
+  color: #56494e;
   margin-top: 15px;
   margin-left: 15px;
+  cursor: pointer;
 }
 
 .wrapper{
   min-height: 100vh;
-  background-color: lightgreen;
+  background-color: white;
 
   width: 100vw;
   z-index: 0;
@@ -59,15 +60,14 @@
   z-index: 2;
   width: 100vw;
   height: 80px;
-  background-color: darkblue;
+  background-color: #a62739;
 }
 .openMenu{
   width:80px;
   height: 80px;
-
   z-index: 3;
   float: left;
-
+  cursor: pointer;
 }
 .sideMenuOpen{
   transition: 0.2s ease-in-out;
@@ -75,6 +75,7 @@
   height: 100vh;
   background-color: white;
   position: fixed;
+  box-shadow: 0px 0px 10px grey;
 }
 .sideMenuClosed{
   transition: 0.2s ease-in-out;
@@ -108,17 +109,18 @@
 }
 
 .searchGrecha{
-  font-size: 18px;
+  font-size: 19px;
   position: absolute;
   width: 250px;
   height: 70px;
   line-height: 70px;
   text-align: center;
-  background-color: darkred;
+  background-color: #a62739;
   color: white;
   margin-top: 50px;
   margin-left: calc(50% - 125px);
   margin-top: calc(100vh - 200px);
+  cursor: pointer;
 }
 
 .closeMenu{
@@ -138,18 +140,19 @@
   margin-top: 20px;
   background-color: white;
   z-index: 4;
+  font-size: 20px;
 }
 .searchButton{
   margin-left: 545px;
   position: absolute;
   width: 50px;
   height: 40px;
-  background-color: darkorange;
+  background-color: #56494e;
   margin-top: -40px;
   border-radius: 0px 25px 25px 0px;
+  cursor: pointer;
 }
 .inputWrapper{
-
   margin-left: calc(50% - 300px);
   width: 580px;
   height: 80px;
@@ -160,6 +163,7 @@
   width: 80vw;
   margin-left: 10vw;
   text-align: center;
+  overflow-x: visible;
 }
 
 .title{
@@ -176,30 +180,45 @@
   padding-top: 20px;
   width: 650px;
   float: right;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
 }
 .weight{
   margin-left: 50px;
   color: white;
+  font-size: 25px;
 }
 .textBlock{
   float: left;
   width: 650px;
   text-align: left;
 }
+
 .follow{
-  margin-top: 400px;
-  width: 100px;
+  display: block;
+  //margin-left: auto;
+  width: 200px;
   height: 60px;
-  background-color: red;
+  line-height: 60px;
+  background-color: white;
+  text-decoration: none;
+  color: #a62739;
+  font-weight: 600;
+  font-size: 30px;
+  border-radius: 10px;
 }
 
 .price{
   margin-left: 50px;
   color: white;
+  font-size: 25px;
 }
 .reseller{
   margin-left: 50px;
   color: white;
+  font-size: 25px;
 }
 
 
@@ -212,7 +231,13 @@
   margin-right: 50px;
   border-radius: 10px;
   height: 350px;
-  background-color: darkblue;
+  background-color: #a62739;
+  border: 2px solid #a62739;
+
+  img{
+    width: 350px;
+    height: 350px;
+  }
 }
 .graphHolderClosed{
   position: fixed;
