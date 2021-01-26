@@ -337,7 +337,6 @@
   width: 80px;
   height: 80px;
 
-
 }
 
 .loadMoreWrapper{
@@ -346,10 +345,40 @@
 
   .loadMore{
     border-radius: 50px;
-    background-color: darkred;
+    background-color: #a62739;
     width: 80px;
     height: 80px;
     margin: 60px auto;
+  }
+}
+
+@media screen and (max-width: 3200px){
+  .lot{
+    width: calc(12.5% - 20px);
+
+    img{
+      width: calc(12.5vw - 20px);
+      height: calc(12.5vw - 20px);
+    }
+
+    .info{
+      width: calc(12.5vw - 20px);
+    }
+  }
+}
+
+@media screen and (max-width: 2800px){
+  .lot{
+    width: calc(14.2% - 20px);
+
+    img{
+      width: calc(14.2vw - 20px);
+      height: calc(14.2vw - 20px);
+    }
+
+    .info{
+      width: calc(14.2vw - 20px);
+    }
   }
 }
 

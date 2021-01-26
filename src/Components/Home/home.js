@@ -104,7 +104,6 @@ const Home = () => {
 
 
     const search = (e) => {
-
         e.preventDefault()
         let searchLineReq = searchLine + "page=0&pageSize=12&search=" + state.input
         axios.get(searchLineReq).then(result => {
@@ -171,8 +170,8 @@ const Home = () => {
                 }
                 state.items.push({
                     img: e.img["s350x350"],
-                    price: e.price,
-                    reseller: e.shop,
+                    price: e.prices[firstPrice],
+                    reseller: firstPrice,
                     title: e.title,
                     url: e.web_url,
                     weight: e.weight,
@@ -192,7 +191,7 @@ const Home = () => {
                     reseller: e.shop,
                     title: e.title,
                     url: e.web_url,
-                    weight: 800,
+                    weight: e.weight,
                     unit: e.unit,
                     producer: 1
                 })
@@ -201,8 +200,7 @@ const Home = () => {
         }
     }
 
-    let carts = <p>Ищу в базе данных</p>
-
+    let carts = null
     if (state.items != null) {
         carts = []
         console.log(state.items)
@@ -225,23 +223,8 @@ const Home = () => {
         })
 
 
-
     }
 
-    let loadB = null
-    if (carts.length == 0){
-         carts = <h1>Ищу гречку в базе данных</h1>
-    }else{
-        if (state.but == 0){
-            loadB = (
-                <div className={classes.loadMoreWrapper}>
-                    <div onClick={loadMore} className={classes.loadMore}>
-                        <FontAwesomeIcon className={classes.chartLine} icon={faSync} size="3x"/>
-                    </div>
-                </div>
-            )
-            }
-    }
 
     return (
         <>
@@ -290,12 +273,13 @@ const Home = () => {
 
 
                 <div className={classes.mainFrame}>
-                    <>
-                        {carts}
-                    </>
 
-                        {loadB}
-
+                    {carts}
+                    <div className={classes.loadMoreWrapper}>
+                        <div onClick={loadMore} className={classes.loadMore}>
+                            <FontAwesomeIcon className={classes.chartLine} icon={faSync} size="3x"/>
+                        </div>
+                    </div>
                 </div>
 
             </div>
