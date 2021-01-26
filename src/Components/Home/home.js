@@ -210,6 +210,7 @@ const Home = () =>{
                 <div className={classes.mainFrame}>
 
                     {carts}
+
                 </div>
 
             </div>
