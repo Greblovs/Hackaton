@@ -27,11 +27,10 @@ const Home = () => {
         but: 0,
         start: 0
     })
-    
 
-    if (state.start == 0) {
-
+    const getGrecha = ()=>{
         state.start = 1
+
         axios.get(searchWheat).then(result => {
             setState(prev => {
                 return {
@@ -39,10 +38,14 @@ const Home = () => {
                     searchRes: result,
                     page: 0,
                     but: 1,
-                    added: 0
+                    added: 0,
+                    items:[]
                 }
             })
         })
+    }
+    if (state.start == 0) {
+        getGrecha()
     }
 
 
@@ -240,7 +243,7 @@ const Home = () => {
                     <div className={classes.menuName}>Меню</div>
                     <div className={classes.categories}>
 
-                        <div className={classes.searchGrecha}>Посмотреть Гречу</div>
+                        <div onClick={getGrecha} className={classes.searchGrecha}>Посмотреть Гречу</div>
                         {catList}
 
 
