@@ -21,7 +21,7 @@ const Home = () =>{
         searchRes: null,
         categories: null,
         page: 0,
-        carts: []
+        items: []
     })
 
 
@@ -130,12 +130,8 @@ const Home = () =>{
     }
 
 
-    let items = null
+
     if (state.searchRes != null) {
-
-        items = []
-
-
         for (let i in state.searchRes.data["objects"]) {
             let e = state.searchRes.data.objects[i];
             let firstPrice = null;
@@ -143,7 +139,7 @@ const Home = () =>{
                 firstPrice = key;
                 break;
             }
-            items.push({
+            state.items.push({
                 img: e.img["s350x350"],
                 price: e.prices[firstPrice],
                 reseller: firstPrice,
@@ -155,13 +151,13 @@ const Home = () =>{
             })
 
         }
-        console.log(items)
     }
 
+    let carts = null
+    if (state.items != null) {
+        carts = []
 
-    if (items != null) {
-
-        state.carts = items.map((element, index)=>{
+        carts = state.items.map((element, index)=>{
            return(
                <div className={classes.lot}>
                    <img className={classes.img} src={element.img}/>
@@ -178,6 +174,7 @@ const Home = () =>{
                </div>
            )
         })
+
 
     }
 
@@ -228,7 +225,7 @@ const Home = () =>{
 
                 <div className={classes.mainFrame}>
 
-                    {state.carts}
+                    {carts}
                     <div onClick={loadMore} className={classes.loadMore}>
                         <FontAwesomeIcon className={classes.chartLine}  icon={faSync} size="3x" />
                     </div>
