@@ -10,9 +10,9 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import GraphElement from "../graph/graph"
 import axios from "axios";
 
-const searchLine = "https://buckwheat-price-seeker.herokuapp.com/products/search?"
+const searchLine = "https://grecha-back.herokuapp.com/products/search?"
 const searchWheat = "https://grecha-back.herokuapp.com/buckwheat/search"
-const getCategories = "https://buckwheat-price-seeker.herokuapp.com/categories/main?page=0&pageSize=8"
+const getCategories = "https://grecha-back.herokuapp.com/categories/main?page=0&pageSize=8"
 
 const Home = () => {
     const [state, setState] = useState({
