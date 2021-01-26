@@ -78,7 +78,6 @@ const Home = () =>{
 
 
     const search = (e) =>{
-        alert(state.input)
         e.preventDefault()
         let searchLineReq = searchLine + "page=1&pageSize=12&search=" + state.input
         axios.get(searchLineReq).then(result => {
