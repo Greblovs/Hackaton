@@ -26,7 +26,7 @@ const Graph = () =>{
         axios.get(graphUrl)
             .then(result => {
                 for (let i in result.data["values"]) {
-                    console.log(i + " " + result.data.values[i])
+
                     chartData.push({label: i, value: result.data.values[i]})
                 }
                 setState(prev => {
@@ -38,7 +38,7 @@ const Graph = () =>{
                 })
             })
     }
-    console.log(state. chartData)
+
     const chartConfigs = {
         type: "line", // The chart type
         width: (window.innerWidth-100), // Width of the chart

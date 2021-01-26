@@ -122,16 +122,45 @@
   margin-top: 20px;
   width: 80vw;
   margin-left: 10vw;
+  text-align: center;
+}
+
+.title{
+  width: 650px;
+  text-align: center;
+  color: white;
+  font-size: 20px;
 
 }
+.img{
+  float: left;
+}
+.info{
+  padding-top: 20px;
+  width: 650px;
+  float: right;
+}
+.weight{
+  float: left;
+  margin-left: 50px;
+  color: white;
+}
+
+.price{
+  float: left;
+  margin-left: 50px;
+  color: white;
+}
+
 .lot{
+
   margin-top: 50px;
   display: inline-flex;
-  width: 200px;
+  width: 1000px;
   margin-left: 50px;
   margin-right: 50px;
   border-radius: 10px;
-  height: 300px;
+  height: 350px;
   background-color: darkblue;
 }
 .graphHolderClosed{

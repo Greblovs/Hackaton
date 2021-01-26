@@ -7,11 +7,16 @@ import { faChartLine } from '@fortawesome/free-solid-svg-icons'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import GraphElement from  "../graph/graph"
+import axios from "axios";
+
+const searchLine = "https://buckwheat-price-seeker.herokuapp.com/products/search?"
 
 const Home = () =>{
     const [state, setState] = useState({
         menuStatus: 0,                  //0 - closed, 1 - opened
-        graphStatus: 0                  //0 - closed, 1 - opened
+        graphStatus: 0,                 //0 - closed, 1 - opened
+        input: null,
+        searchRes: null
     })
 
 
@@ -47,6 +52,78 @@ const Home = () =>{
     }else{
         graphClass = classes.graphHolderOpened
     }
+    const updateString = (event) =>{
+        setState( prev => {
+            return{
+                ...prev,
+                input: event.target.value
+            }
+        })
+
+    }
+
+    const search = () =>{
+        alert("searching")
+        let searchLineReq = searchLine + "page=1&pageSize=12&search=" + state.input
+        axios.get(searchLineReq).then(result => {
+            setState( prev => {
+                return{
+                    ...prev,
+                    searchRes: result
+                }
+            })
+        })
+    }
+    console.log(state.searchRes)
+
+    let items = null
+    if (state.searchRes != null) {
+        items = []
+
+        for (let i in state.searchRes.data["objects"]) {
+            let e = state.searchRes.data.objects[i];
+            let firstPrice = null;
+            for (let key in e.prices){
+                firstPrice = key;
+                break;
+            }
+            items.push({
+                img: e.img["s350x350"],
+                price: e.prices[firstPrice],
+                title: e.title,
+                url: e.web_url,
+                weight: e.weight,
+                unit: e.unit,
+                producer: e.producer
+            })
+
+        }
+        console.log(items)
+    }
+    let carts = null
+    if (items != null) {
+        carts = [];
+        carts = items.map((element, index)=>{
+           return(
+               <div className={classes.lot}>
+                   <img className={classes.img} src={element.img}/>
+                   <div className={classes.info}>
+                       <p className={classes.title}>{element.title}</p>
+                       <p className={classes.price}>Ціна: {element.price/100} грн</p>
+                       <p className={classes.weight}>Вага: {element.weight}</p>
+                   </div>
+
+               </div>
+           )
+        })
+        for (let i in items) {
+            carts.push(
+
+
+            )
+        }
+    }
+
 
     return(
         <>
@@ -67,12 +144,15 @@ const Home = () =>{
                         <FontAwesomeIcon className={classes.bars} icon={faBars} size="3x" />
                     </div>
                     <div className={classes.inputWrapper}>
-                        <input type={"text"} name={"search"} className={classes.searchField}>
+                        <form onSubmit={search}>
+                            <input type={"text"} name={"search"} onChange={updateString} className={classes.searchField}>
 
-                        </input>
-                        <div className={classes.searchButton}>
-                            <FontAwesomeIcon className={classes.search} icon={faSearch} size="lg" />
-                        </div>
+                            </input>
+                            <div onClick={search} type={"submit"} className={classes.searchButton}>
+                                <FontAwesomeIcon className={classes.search} icon={faSearch} size="lg" />
+                            </div>
+
+                        </form>
                     </div>
                 </div>
                 <div className={classes.chart} onClick={openGraph}>
@@ -81,12 +161,8 @@ const Home = () =>{
 
 
                 <div className={classes.mainFrame}>
-                    <div className={classes.lot}></div>
-                    <div className={classes.lot}></div>
-                    <div className={classes.lot}></div>
-                    <div className={classes.lot}></div>
-                    <div className={classes.lot}></div>
-                    <div className={classes.lot}></div>
+
+                    {carts}
                 </div>
 
             </div>
