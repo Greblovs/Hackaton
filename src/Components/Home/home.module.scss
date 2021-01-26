@@ -266,6 +266,8 @@
   margin-left: 0px;
   z-index: 10;
 }
+
+
 .exitGraph{
   z-index: 11;
   position: absolute;
@@ -277,15 +279,39 @@
 
 }
 
-.loadMore{
-  border-radius: 50px;
-  background-color: darkred;
-  width: 80px;
-  height: 80px;
-  margin: 120px auto;
+.loadMoreWrapper{
+  width: 100vw;
+  height: 200px;
 
+  .loadMore{
+    border-radius: 50px;
+    background-color: darkred;
+    width: 80px;
+    height: 80px;
+    margin: 120px auto;
+  }
 }
 
+
+
+
+
+
+@media screen and (max-width: 800px){
+  .lot{
+    margin: 10px;
+    width: calc(50vw - 20px);
+
+    img{
+      width: calc(50vw - 20px);
+      height: calc(50vw - 20px);
+    }
+
+    .info{
+      width: calc(50vw - 20px);
+    }
+  }
+}
 
 
 @media screen and (max-width: 400px){
