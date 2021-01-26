@@ -21,7 +21,8 @@ const Home = () => {
         searchRes: null,
         categories: null,
         page: 0,
-        items: []
+        items: [],
+        added:0
     })
 
 
@@ -80,6 +81,7 @@ const Home = () => {
 
 
     const search = (e) => {
+        alert("searcg")
         e.preventDefault()
         let searchLineReq = searchLine + "page=0&pageSize=12&search=" + state.input
         axios.get(searchLineReq).then(result => {
@@ -87,7 +89,9 @@ const Home = () => {
                 return {
                     ...prev,
                     searchRes: result,
-                    page: 0
+                    page: 0,
+                    added: 0,
+                    items: []
                 }
             })
         })
@@ -95,6 +99,7 @@ const Home = () => {
     console.log(state.searchRes)
 
     const loadMore = (e) => {
+        alert("searcg")
         let num = state.page + 1;
         let searchLineReqQ = searchLine + "page=" + num + "&pageSize=12&search=" + state.input
         axios.get(searchLineReqQ).then(result => {
@@ -102,7 +107,8 @@ const Home = () => {
                 return {
                     ...prev,
                     searchRes: result,
-                    page: num
+                    page: num,
+                    added: 0
                 }
             })
         })
@@ -129,8 +135,10 @@ const Home = () => {
     }
 
 
-    if (state.searchRes != null) {
+    if (state.searchRes != null && state.added == 0) {
+
         for (let i in state.searchRes.data["objects"]) {
+            console.log(i)
             let e = state.searchRes.data.objects[i];
             let firstPrice = null;
             for (let key in e.prices) {
@@ -147,14 +155,14 @@ const Home = () => {
                 unit: e.unit,
                 producer: e.producer
             })
-
+        state.added = 1;
         }
     }
 
     let carts = null
     if (state.items != null) {
         carts = []
-
+        console.log(state.items)
         carts = state.items.map((element, index) => {
             return (
                 <div className={classes.lot}>
