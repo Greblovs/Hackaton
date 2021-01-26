@@ -1,6 +1,10 @@
 import React from 'react';
 import classes from "./home.module.scss"
 import {useState} from 'react';
+import { faBars } from '@fortawesome/free-solid-svg-icons'
+import { faTimes } from '@fortawesome/free-solid-svg-icons'
+import { faChartLine } from '@fortawesome/free-solid-svg-icons'
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const Home = () =>{
     const [state, setState] = useState({
@@ -29,16 +33,24 @@ const Home = () =>{
         <>
             <div className={classes.wrapper}>
                 <div className={menuClass}>
-                    <div className={classes.closeMenu} onClick={openMenu}></div>
+                    <div className={classes.closeMenu} onClick={openMenu}>
+
+                        <FontAwesomeIcon className={classes.cross} icon={faTimes} size="3x" />
+                    </div>
                 </div>
                 <div className={classes.menu}>
-                    <div className={classes.openMenu} onClick={openMenu}></div>
+                    <div className={classes.openMenu} onClick={openMenu}>
+                        <FontAwesomeIcon className={classes.bars} icon={faBars} size="3x" />
+                    </div>
                     <div className={classes.inputWrapper}>
                         <input type={"text"} name={"search"} className={classes.searchField}>
 
                         </input>
                         <div className={classes.searchButton}></div>
                     </div>
+                </div>
+                <div className={classes.chart}>
+                    <FontAwesomeIcon className={classes.chartLine}  icon={faChartLine} size="3x" />
                 </div>
 
                 <div className={classes.mainFrame}>
@@ -51,6 +63,7 @@ const Home = () =>{
                 </div>
 
             </div>
+
         </>
     )
 }

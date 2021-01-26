@@ -1,11 +1,46 @@
 *{
   margin: 0px;
   padding: 0px;
+  overflow-x: hidden;
 }
 *:focus {
   outline: none;
 }
 
+.bars{
+  color: white;
+  margin-top: 15px;
+  margin-left: 15px;
+}
+
+.barsRotated{
+  transform: rotate(90deg);
+  color: white;
+  margin-top: 15px;
+  margin-left: 15px;
+}
+
+.chart{
+  text-align: center;
+  width: 80px;
+  height: 80px;
+  background-color: black;
+  position: fixed;
+  margin-top: calc(100vh - 200px);
+  margin-left: calc(100vw - 140px);
+  border-radius: 100px;
+}
+
+.chartLine{
+  margin-top: 15px;
+  color: white;
+}
+
+.cross{
+  color: black;
+  margin-top: 15px;
+  margin-left: 15px;
+}
 
 .wrapper{
   min-height: 100vh;
@@ -24,7 +59,7 @@
 .openMenu{
   width:80px;
   height: 80px;
-  background-color: black;
+
   z-index: 3;
   float: left;
 
@@ -47,7 +82,7 @@
 .closeMenu{
   width:80px;
   height: 80px;
-  background-color: black;
+
   z-index: 3;
   float: right;
 }
